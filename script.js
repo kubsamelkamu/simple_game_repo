@@ -37,9 +37,9 @@ while (number_of_game > 0) {
 
 
 
-winnerOfGame(computer_score,player_score);
+getPlayerScore(computer_score,player_score);
 
-function winnerOfGame(computer_score,user_score){
+function getPlayerScore(computer_score,user_score){
     const number_of_game = computer_score + player_score;
     if(computer_score > user_score){
         console.log('Computer win the game by getting the score ' + computer_score + ' out of ' + number_of_game);
