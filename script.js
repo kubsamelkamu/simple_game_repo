@@ -1,6 +1,6 @@
 // Get the  refrence to the Buttons
 const rockButton = document.getElementById('rock');
-const scissorButton = document.getElementById('scissors');
+const scissorButton = document.getElementById('scissor');
 const paperButton = document.getElementById('paper');
 
 
