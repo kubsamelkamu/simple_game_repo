@@ -1,52 +1,45 @@
-let number_of_game = (prompt("Enter a of times you wanna to play a game: "));
-let computer_score = 0;
-let player_score = 0;
-
-function getComputerChoice(game_option){
-   const random_index = Math.floor(Math.random() * 3);
-   return game_option[random_index];
-
-}
-
-const game_options = ["ROCK","PAPER","SCISSOR"];
+// Get the  refrence to the Buttons
+const rockButton = document.getElementById('rock');
+const scissorButton = document.getElementById('scissors');
+const paperButton = document.getElementById('paper');
 
 
-function playGame(player_selection,computer_selection){
+// Get the refrence to the result id
+const resultid = document.getElementById('result');
+resultid.style.color = 'red';
+resultid.style.fontSize = '30px';
 
-   // conditions to judge the game
-   if ((player_selection === 'ROCK' && computer_selection == 'SCISSOR') ||
-       ( player_selection == 'SCISSOR' && computer_selection == 'PAPER') ||
-       (player_selection == 'PAPER' && computer_selection === 'ROCK')) {
 
-        player_score += 1;
-        confirm('human player win this game-round');
-   }else{
-        computer_score += 1;
-        confirm('computer player win this game-round');
-   }
+
+// creating a function that perform game to be played
+
+function playGame(playerChoice) {
+
+    // Generate computer's choice randomly
+    const computerChoices = ['rock', 'paper', 'scissors'];
+    const computerChoice = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+
+    const winner = determineWinner(playerChoice,computerChoice);
     
-
+    resultid.textContent = `you choose ${playerChoice}, computer choose ${computerChoice}. ${winner}`
 }
 
-while (number_of_game > 0) {
-    let playerselection = prompt("select Rock|Paper|Scissor: ").toUpperCase();
-    let computerSelection = getComputerChoice(game_options);
-    playGame(playerselection,computerSelection);
-    number_of_game -= 1;
-}
-
-
-
-getPlayerScore(computer_score,player_score);
-
-function getPlayerScore(computer_score,user_score){
-    const number_of_game = computer_score + player_score;
-    if(computer_score > user_score){
-        console.log('Computer win the game by getting the score ' + computer_score + ' out of ' + number_of_game);
-    }else if(computer_score < user_score){
-        console.log('Human player win the game by getting the score ' + user_score + ' out of ' + number_of_game);
+function determineWinner(playerChoice,computerChoice) {
+    if (playerChoice === computerChoice) {
+        return 'it is tie , and there is no winner in this round.';
+    }else if (playerChoice === 'rock' && computerChoice === 'scissor'
+        || playerChoice === 'paper' && computerChoice === 'rock' ||
+         playerChoice === 'scissor' && computerChoice === 'paper') {
+        return 'you win this round!!!';
     }else{
-        console.log('There is no winner');
+        return 'computer win this round!!!';
     }
-
+     
 }
+
+// function addEvent Listenner is added to the buttons
+
+rockButton.addEventListener('click',() => playGame('rock'));
+scissorButton.addEventListener('click',() =>playGame('scissor'));
+paperButton.addEventListener('click',() => playGame('paper'));
+
